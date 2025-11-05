@@ -53,6 +53,7 @@ import { ShowBlocks } from '@ckeditor/ckeditor5-show-blocks';
 import { SelectAll } from '@ckeditor/ckeditor5-select-all';
 import { FindAndReplace } from '@ckeditor/ckeditor5-find-and-replace';
 import FullScreen from '@pikulinpw/ckeditor5-fullscreen';
+import CardLinkPlugin from './plugins/cardlink_plugin.js';
 
 export default class ClassicEditor extends ClassicEditorBase {
 }
@@ -110,5 +111,6 @@ ClassicEditor.builtinPlugins = [
     ShowBlocks,
     SelectAll,
     FindAndReplace,
-    FullScreen
+    FullScreen,
+    CardLinkPlugin
 ];

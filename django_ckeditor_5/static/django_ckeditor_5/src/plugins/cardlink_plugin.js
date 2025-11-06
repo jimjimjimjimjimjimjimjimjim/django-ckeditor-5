@@ -1,24 +1,32 @@
-// 檔案路徑: content/static/content/js/cardlink/plugin.js (v12 最終版)
+// 檔案路徑: content/static/content/js/cardlink/plugin.js (v14 最終版)
 
-// 【偵錯】v12：檢查這個檔案是否被 django-ckeditor-5 核心成功載入
-console.log('CKEditor Custom Plugin (v12): plugin.js 檔案已載入！');
+// 【偵錯】v14：檢查這個檔案是否被 external_plugin_resources 成功載入
+console.log('CKEditor Custom Plugin (v14): plugin.js 檔案已載入！');
 
 class CardLinkPlugin {
     // 1. CKEditor 核心會呼叫這個 constructor 並傳入 editor
     constructor(editor) {
         this.editor = editor;
-        // 【偵錯】v12：確認 Class 被實例化
-        console.log('CKEditor Custom Plugin (v12): CardLinkPlugin constructor 已執行。');
+        // 【偵錯】v14：確認 Class 被實例化
+        console.log('CKEditor Custom Plugin (v14): CardLinkPlugin constructor 已執行。');
+    }
+
+    // 【v14 關鍵修正】
+    // 讓 CKEditor 知道這個 Class 的 "官方名稱"
+    // 這必須和 settings.py 中的 'extraPlugins' 和 'external_plugin_resources' 名稱一致
+    static get pluginName() {
+        return 'cardLink'; // <--- 我們統一使用小寫的 'cardLink'
     }
 
     // 2. CKEditor 核心會呼叫 init()
     init() {
         const editor = this.editor;
         
-        // 【偵錯】v12：確認 init() 被呼叫
-        console.log('CKEditor Custom Plugin (v12): CardLinkPlugin.init() 已執行。');
+        // 【偵錯】v14：確認 init() 被呼叫
+        console.log('CKEditor Custom Plugin (v14): CardLinkPlugin.init() 已執行。');
 
         // 3. 我們向 CKEditor 的 UI 元件工廠註冊一個新的按鈕
+        // 這裡的 'cardLink' 必須和 settings.py 的 toolbar 設定一致
         editor.ui.componentFactory.add('cardLink', locale => {
             const view = editor.ui.createButtonView(locale);
 
@@ -31,13 +39,13 @@ class CardLinkPlugin {
 
             // 5. 綁定按鈕的點擊事件
             this.listenTo(view, 'execute', () => {
-                // 【偵錯】v12：確認按鈕點擊事件
-                console.log('CKEditor Custom Plugin (v12): 按鈕被點擊，開啟 Modal...');
+                // 【偵錯】v14：確認按鈕點擊事件
+                console.log('CKEditor Custom Plugin (v14): 按鈕被點擊，開啟 Modal...');
                 showCardSearchModal(editor);
             });
 
-            // 【偵錯】v12：確認按鈕已註冊
-            console.log('CKEditor Custom Plugin (v12): "cardLink" 按鈕已註冊到 componentFactory。');
+            // 【偵錯】v14：確認按鈕已註冊
+            console.log('CKEditor Custom Plugin (v14): "cardLink" 按鈕已註冊到 componentFactory。');
             return view;
         });
     }
@@ -46,9 +54,8 @@ class CardLinkPlugin {
 // -----------------------------------------------------------------------------
 // Modal 輔助函式 (保持不變)
 // -----------------------------------------------------------------------------
-
 function showCardSearchModal(editor) {
-    // (此函式內容與 v10 相同，不需變更)
+    // (此函式內容與 v12/v13 相同，不需變更)
     const oldModal = document.getElementById('cardSearchModal');
     if (oldModal) { oldModal.remove(); }
     const modalHtml = `
@@ -90,9 +97,8 @@ function showCardSearchModal(editor) {
         }, 300);
     });
 }
-
 function displaySearchResults(results, editor) {
-    // (此函式內容與 v10 相同，不需變更)
+    // (此函式內容與 v12/v13 相同，不需變更)
     const resultsContainer = document.getElementById('cardSearchResults');
     resultsContainer.innerHTML = '';
     if (results.length === 0) {

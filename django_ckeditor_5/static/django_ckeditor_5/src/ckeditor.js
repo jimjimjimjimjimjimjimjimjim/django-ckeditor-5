@@ -1,4 +1,4 @@
-console.log('CKEditor Debug: ckedito.js (v-final) 檔案已載入！');
+console.log('CKEditor Debug: ckedito.js (v-final-test) 檔案已載入！');
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';

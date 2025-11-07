@@ -2,10 +2,12 @@
 
 // 【偵錯】v14：檢查這個檔案是否被 external_plugin_resources 成功載入
 console.log('CKEditor Custom Plugin (v14): plugin.js 檔案已載入！');
+import { Plugin } from '@ckeditor/ckeditor5-core';
 
-class CardLinkPlugin {
+class CardLinkPlugin extends Plugin {
     // 1. CKEditor 核心會呼叫這個 constructor 並傳入 editor
     constructor(editor) {
+        super(editor);
         this.editor = editor;
         // 【偵錯】v14：確認 Class 被實例化
         console.log('CKEditor Custom Plugin (v14): CardLinkPlugin constructor 已執行。');

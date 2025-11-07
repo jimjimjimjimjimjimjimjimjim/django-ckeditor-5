@@ -1,3 +1,4 @@
+console.log('CKEditor Debug: ckedito.js (v-final) 檔案已載入！');
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
@@ -54,6 +55,8 @@ import { SelectAll } from '@ckeditor/ckeditor5-select-all';
 import { FindAndReplace } from '@ckeditor/ckeditor5-find-and-replace';
 import FullScreen from '@pikulinpw/ckeditor5-fullscreen';
 import CardLinkPlugin from './plugins/cardlink_plugin.js';
+
+console.log('CKEditor Debug: CardLinkPlugin 變數內容:', CardLinkPlugin);
 
 export default class ClassicEditor extends ClassicEditorBase {
 }
@@ -112,5 +115,5 @@ ClassicEditor.builtinPlugins = [
     SelectAll,
     FindAndReplace,
     FullScreen,
-    CardLinkPlugin
+    CardLinkPlugin,
 ];

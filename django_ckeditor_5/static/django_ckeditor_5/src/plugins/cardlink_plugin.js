@@ -124,3 +124,4 @@ function displaySearchResults(results, editor) {
         resultsContainer.appendChild(resultItem);
     });
 }
+export default CardLinkPlugin;

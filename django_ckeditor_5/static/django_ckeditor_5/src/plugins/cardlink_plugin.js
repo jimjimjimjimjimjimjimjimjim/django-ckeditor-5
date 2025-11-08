@@ -6,7 +6,7 @@ import { ButtonView } from '@ckeditor/ckeditor5-ui';
 console.log('CKEditor Custom Plugin (v14): plugin.js 檔案已載入！');
 class CardLinkPlugin extends Plugin {
     static get requires() {
-        return [ ButtonView ];
+        return [ ];
     }
     // 1. CKEditor 核心會呼叫這個 constructor 並傳入 editor
     constructor(editor) {
@@ -25,34 +25,25 @@ class CardLinkPlugin extends Plugin {
 
     // 2. CKEditor 核心會呼叫 init()
     init() {
-        const editor = this.editor;
-        
-        // 【偵錯】v14：確認 init() 被呼叫
-        console.log('CKEditor Custom Plugin (v14): CardLinkPlugin.init() 已執行。');
+            editor.ui.componentFactory.add('cardLink', locale => {
+                const view = new ButtonView(locale); // ✅ 修正：用 new 建立 ButtonView
 
-        // 3. 我們向 CKEditor 的 UI 元件工廠註冊一個新的按鈕
-        // 這裡的 'cardLink' 必須和 settings.py 的 toolbar 設定一致
-        editor.ui.componentFactory.add('cardLink', locale => {
-            const view = editor.ui.createButtonView(locale);
+                // 設定按鈕屬性
+                view.set({
+                    label: '插入卡片',
+                    withText: true,
+                    tooltip: true
+                });
 
-            // 4. 設定按鈕的外觀
-            view.set({
-                label: '插入卡片',
-                withText: true,
-                tooltip: true
+                // 綁定按鈕事件
+                view.on('execute', () => {
+                    console.log('CKEditor Custom Plugin (v14): 按鈕被點擊，開啟 Modal...');
+                    showCardSearchModal(editor);
+                });
+
+                console.log('CKEditor Custom Plugin (v14): "cardLink" 按鈕已註冊到 componentFactory。');
+                return view;
             });
-
-            // 5. 綁定按鈕的點擊事件
-            this.listenTo(view, 'execute', () => {
-                // 【偵錯】v14：確認按鈕點擊事件
-                console.log('CKEditor Custom Plugin (v14): 按鈕被點擊，開啟 Modal...');
-                showCardSearchModal(editor);
-            });
-
-            // 【偵錯】v14：確認按鈕已註冊
-            console.log('CKEditor Custom Plugin (v14): "cardLink" 按鈕已註冊到 componentFactory。');
-            return view;
-        });
     }
 }
 

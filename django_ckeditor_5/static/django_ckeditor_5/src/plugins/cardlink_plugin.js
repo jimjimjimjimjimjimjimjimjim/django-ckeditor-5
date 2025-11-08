@@ -70,14 +70,21 @@ function showCardSearchModal(editor) {
             #cardSearchModal, #cardSearchModal h3 {
                 color: #333; /* 修正：Modal 預設文字顏色 */
             }
+            
+            /* * 【v21 修正】
+             * 強制指定 Input 欄位的背景和文字顏色，
+             * 覆蓋 Django Admin 的深色模式樣式
+             */
+            #cardSearchModal input[type="text"] {
+                color: #222 !important;             /* 強制文字為深黑色 */
+                background-color: #FFF !important;  /* 強制背景為白色 */
+                border: 1px solid #999 !important;  /* 確保邊框可見 */
+                padding: 8px;
+            }
             #cardSearchModal input::placeholder {
                 color: #999;
             }
-            #cardSearchModal input {
-                color: #222; /* 修正：Input 輸入文字顏色 */
-                border: 1px solid #ccc;
-                padding: 8px;
-            }
+            
             #cardSearchResults {
                 background: #fdfdfd;
             }

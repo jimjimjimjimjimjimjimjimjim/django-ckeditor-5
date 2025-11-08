@@ -25,6 +25,11 @@ class CardLinkPlugin extends Plugin {
 
     // 2. CKEditor 核心會呼叫 init()
     init() {
+            const editor = this.editor;
+                    
+            // 【偵錯】v14：確認 init() 被呼叫
+            console.log('CKEditor Custom Plugin (v14): CardLinkPlugin.init() 已執行。');
+
             editor.ui.componentFactory.add('cardLink', locale => {
                 const view = new ButtonView(locale); // ✅ 修正：用 new 建立 ButtonView
 

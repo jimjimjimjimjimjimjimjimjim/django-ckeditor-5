@@ -1,10 +1,13 @@
 // 檔案路徑: content/static/content/js/cardlink/plugin.js (v14 最終版)
 
 // 【偵錯】v14：檢查這個檔案是否被 external_plugin_resources 成功載入
-console.log('CKEditor Custom Plugin (v14): plugin.js 檔案已載入！');
 import { Plugin } from '@ckeditor/ckeditor5-core';
-
+import { ButtonView } from '@ckeditor/ckeditor5-ui';
+console.log('CKEditor Custom Plugin (v14): plugin.js 檔案已載入！');
 class CardLinkPlugin extends Plugin {
+    static get requires() {
+        return [ ButtonView ];
+    }
     // 1. CKEditor 核心會呼叫這個 constructor 並傳入 editor
     constructor(editor) {
         super(editor);
